@@ -1,3 +1,6 @@
+*{
+  font-family: 'Commissioner', sans-serif;
+}
 body {
     margin: 0;
     background-color: #D9AFD9;
@@ -33,35 +36,35 @@ body {
     float: left;
   }
 
-  .celeste {
+  .light-blue {
     background: #0091EA;
   }
 
-  .celeste.light {
+  .light-blue.light {
     background: #40C4FF;
   }
 
-  .violeta {
+  .violet {
     background: #4A148C;
   }
 
-  .violeta.light {
+  .violet.light {
     background: #8E24AA;
   }
 
-  .naranja {
+  .orange {
     background: #FF6D00;
   }
 
-  .naranja.light {
+  .orange.light {
     background: #FFAB40;
   }
 
-  .verde {
+  .green {
     background: #00C853;
   }
 
-  .verde.light {
+  .green.light {
     background: #69F0AE;
   }
   

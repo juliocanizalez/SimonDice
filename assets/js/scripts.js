@@ -1,9 +1,9 @@
-const celeste = document.getElementById('celeste')
-const violeta = document.getElementById('violeta')
-const naranja = document.getElementById('naranja')
-const verde = document.getElementById('verde')
-const btnEmpezar = document.getElementById('btnEmpezar')
-const LAST_LEVEL = 30
+const lightBlue = document.getElementById('lightBlue')
+const violet = document.getElementById('violet')
+const orange = document.getElementById('orange')
+const green = document.getElementById('green')
+const btnStart = document.getElementById('btnStart')
+const LAST_LEVEL = 10
 class Juego {
 
     constructor() {
@@ -15,26 +15,34 @@ class Juego {
     }
 
     initialize() {
-        this.nextLevel() = this.nextLevel.bind(this)
+        this.nextLevel = this.nextLevel.bind(this)
         this.chooseColor = this.chooseColor.bind(this)
         this.level = 1
         this.colors = {
-            celeste, 
-            violeta, 
-            naranja, 
-            verde
+            lightBlue, 
+            violet, 
+            orange, 
+            green
         }
         this.counter()    
+    }
+
+    toggleBtnStart(){
+        if(btnStart.classList.contains('hide')){
+            btnStart.classList.remove('hide')
+        } else {
+            btnStart.classList.add('hide')
+        }
     }
 
     counter(){ 
         let count = 3
         var countdown = setInterval(function(){
-            document.getElementById('btnEmpezar').innerHTML=count
+            document.getElementById('btnStart').innerHTML=count
             count--
             if(count<0){
                 clearInterval(countdown)
-                btnEmpezar.classList.add('hide')
+                this.toggleBtnStart()
             }
         },1000)      
     }
@@ -52,25 +60,25 @@ class Juego {
     transformNumberToColor(number){
         switch(number){
             case 0:
-                return 'celeste'
+                return 'lightBlue'
             case 1:
-                return 'violeta'
+                return 'violet'
             case 2:
-                return 'naranja'
+                return 'orange'
             case 3:
-                return 'verde'
+                return 'green'
         }
     }
 
     transformColorToNumber(color){
         switch(color){
-            case 'celeste':
+            case 'lightBlue':
                 return 0
-            case 'violeta':
+            case 'violet':
                 return 1
-            case 'naranja':
+            case 'orange':
                 return 2
-            case 'verde':
+            case 'green':
                 return 3
         }
     }
@@ -92,17 +100,17 @@ class Juego {
     }
 
     addClickEvent(){
-        this.colors.celeste.addEventListener('click', this.chooseColor)
-        this.colors.verde.addEventListener('click', this.chooseColor)
-        this.colors.violeta.addEventListener('click', this.chooseColor)
-        this.colors.naranja.addEventListener('click', this.chooseColor)
+        this.colors.lightBlue.addEventListener('click', this.chooseColor)
+        this.colors.green.addEventListener('click', this.chooseColor)
+        this.colors.violet.addEventListener('click', this.chooseColor)
+        this.colors.orange.addEventListener('click', this.chooseColor)
     }
 
-    deleteClickEvent(){
-        this.colors.celeste.removeEventListener('click', this.chooseColor)
-        this.colors.verde.removeEventListener('click', this.chooseColor)
-        this.colors.violeta.removeEventListener('click', this.chooseColor)
-        this.colors.naranja.removeEventListener('click', this.chooseColor)
+    deleteClickEvts(){
+        this.colors.lightBlue.removeEventListener('click', this.chooseColor)
+        this.colors.green.removeEventListener('click', this.chooseColor)
+        this.colors.violet.removeEventListener('click', this.chooseColor)
+        this.colors.orange.removeEventListener('click', this.chooseColor)
     }
 
     chooseColor(evt){
@@ -113,17 +121,27 @@ class Juego {
             this.subLevel++
             if(this.subLevel ===this.level){
                 this.level++
-                //this.deleteClickEvts()
+                this.deleteClickEvts()
                 if(this.level===(LAST_LEVEL+1)){
-                    //WIN!
+                    this.victory()
                 }else{
-                    setTimeout(this.nextLevel(), 900)
+                    setTimeout(this.nextLevel, 1000)
                 }
             }
         }else{
-            //LOSE
+            this.defeat()
         }
+    }
 
+    victory(){
+        swal('Victory!', 'Congratulations! You have completed all the levels!', 'success' ).then(this.initialize())
+    }
+
+    defeat(){
+        swal('Defeat', 'Better luck next time :(', 'error').then(()=> {
+            this.deleteClickEvts()
+            this.initialize()
+        })
     }
 
 }
