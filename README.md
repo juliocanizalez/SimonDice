@@ -1,4 +1,4 @@
-# SimonDice [logo]: https://github.com/juliocanizalez/SimonDice/blob/main/assets/img/favicon.png
+# SimonDice ![alt text](https://raw.githubusercontent.com/juliocanizalez/SimonDice/main/assets/img/favicon.png "Game logo")
 
 #### How to play?
 
