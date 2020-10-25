@@ -3,7 +3,7 @@ const violet = document.getElementById('violet')
 const orange = document.getElementById('orange')
 const green = document.getElementById('green')
 const btnStart = document.getElementById('btnStart')
-const LAST_LEVEL = 10
+const LAST_LEVEL = 15
 class Juego {
 
     constructor() {
@@ -27,14 +27,6 @@ class Juego {
         this.counter()    
     }
 
-    toggleBtnStart(){
-        if(btnStart.classList.contains('hide')){
-            btnStart.classList.remove('hide')
-        } else {
-            btnStart.classList.add('hide')
-        }
-    }
-
     counter(){ 
         let count = 3
         var countdown = setInterval(function(){
@@ -42,9 +34,9 @@ class Juego {
             count--
             if(count<0){
                 clearInterval(countdown)
-                this.toggleBtnStart()
+                btnStart.classList.add('hide')
             }
-        },1000)      
+        },1000)     
     }
     
     generateSeq(){
@@ -52,6 +44,7 @@ class Juego {
     }
 
     nextLevel(){
+        document.getElementById('level').innerHTML = `Level ${this.level}`
         this.subLevel = 0
         this.illuminateSeq()
         this.addClickEvent()
@@ -134,18 +127,25 @@ class Juego {
     }
 
     victory(){
-        swal('Victory!', 'Congratulations! You have completed all the levels!', 'success' ).then(this.initialize())
+        swal('Victory!', 'Congratulations! You have completed all the levels!', 'success' ).then(this.toggleButton())
     }
 
     defeat(){
         swal('Defeat', 'Better luck next time :(', 'error').then(()=> {
             this.deleteClickEvts()
-            this.initialize()
+            this.toggleButton()
         })
+    }
+
+    toggleButton(){
+        document.getElementById('level').innerHTML = ' '
+        document.getElementById('btnStart').innerHTML='Play'
+        btnStart.classList.remove('hide')
+        
     }
 
 }
 
 function startGame() {
-    var juego = new Juego()
+    new Juego()
 }
